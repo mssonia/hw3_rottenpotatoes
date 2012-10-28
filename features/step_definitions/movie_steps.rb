@@ -32,3 +32,8 @@ When /I (un)?check the following ratings: (.*)/ do |uncheck, rating_list|
      rating_list.split(', ').each {|x| step %{I check "ratings_#{x}"}}
   end
 end
+
+Then /I should see all of the movies/ do
+   rows = page.all('#movies tr').size - 1
+   rows.should == Movie.count()
+end
